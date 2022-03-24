@@ -9,6 +9,7 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->label_title->setText(QString("QMPlayer V%1").arg(APP_VERSION));
     this->setTitleBar(ui->titleBar);
     connect(this, &MWidgetBase::windowStateChanged, this, &Widget::on_windowStateChanged);
 }
