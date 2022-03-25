@@ -1,8 +1,8 @@
-﻿
-*{
+﻿*{
         color: rgb(238, 238, 238);
 }
 
+/*标题栏样式*/
 #label_title{
         font: 75 11pt "微软雅黑";
 }
@@ -12,13 +12,28 @@
 }
 
 #but_close{
+border:transparent;
 background: url(:/Style/image/close.png) center center no-repeat;
 }
 
-#but_max{
+#but_max, #but_max[Max=false]{
+border:transparent;
 background: url(:/Style/image/max.png) center center no-repeat;
 }
 
+#but_max[Max=true]{
+border:transparent;
+background: url(:/Style/image/restore.png) center center no-repeat;
+}
+
 #but_min{
+border:transparent;
 background: url(:/Style/image/min.png) center center no-repeat;
+}
+
+#but_close:hover, #but_max:hover, #but_min:hover{
+background-color: rgba(209, 209, 209, 100);
+}
+#but_close:pressed, #but_max:pressed, #but_min:pressed{
+background-color: rgba(51, 8, 103, 100);
 }
