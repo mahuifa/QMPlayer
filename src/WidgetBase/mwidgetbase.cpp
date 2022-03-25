@@ -41,9 +41,8 @@ void MWidgetBase::init()
                     GWL_STYLE,                          // 设置窗口属性
                     ::GetWindowLong(hwnd, GWL_STYLE)    // 获取窗口属性
                     | WS_MAXIMIZEBOX                    // 创建带有最大化按钮的窗口
-                    | WS_THICKFRAME                     // 创建有边框的窗口
-                    | WS_CAPTION
-                     );                      // 创建一个带标题栏的窗口
+                    | WS_THICKFRAME                     // 窗口有一个大小调整边框
+                    | WS_CAPTION);                      // 创建一个带标题栏的窗口(圆角效果)
 #endif
 }
 
@@ -54,6 +53,11 @@ bool MWidgetBase::eventFilter(QObject *watched, QEvent *event)
     return QWidget::eventFilter(watched, event);
 }
 
+/**
+ * @brief            当前this对象事件处理
+ * @param watched
+ * @param event
+ */
 void MWidgetBase::thisEvent(QObject *watched, QEvent *event)
 {
     if(watched != this)
@@ -65,13 +69,13 @@ void MWidgetBase::thisEvent(QObject *watched, QEvent *event)
     {
         emit windowStateChanged(this->windowState());    // 窗口状态变化
     }
-    if(event->type() == QEvent::Resize)
-    {
-        qDebug() << this->size();
-//        m_background.show();
-    }
 }
 
+/**
+ * @brief             m_titleBar对象事件处理
+ * @param watched
+ * @param event
+ */
 void MWidgetBase::titleBarEvent(QObject *watched, QEvent *event)
 {
     if(watched != m_titleBar)
