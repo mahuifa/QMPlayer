@@ -36,13 +36,13 @@
     <widget class="QWidget" name="background" native="true">
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="leftMargin">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -51,11 +51,31 @@
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_title">
-        <property name="text">
-         <string>标题</string>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>1</number>
         </property>
-       </widget>
+        <item>
+         <widget class="QLabel" name="label_icon">
+          <property name="minimumSize">
+           <size>
+            <width>10</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_title">
+          <property name="text">
+           <string>标题</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="0" column="1">
        <spacer name="horizontalSpacer">

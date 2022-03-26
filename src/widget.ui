@@ -53,7 +53,7 @@ border: 2px solid  rgb(0, 255, 0);
    </item>
    <item row="1" column="0">
     <widget class="QWidget" name="body" native="true">
-     <layout class="QGridLayout" name="gridLayout_3">
+     <layout class="QGridLayout" name="gridLayout_2">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -70,16 +70,36 @@ border: 2px solid  rgb(0, 255, 0);
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QWidget" name="widget" native="true"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QWidget" name="widget_2" native="true">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>50</height>
-         </size>
-        </property>
+       <widget class="QWidget" name="videoWidget" native="true">
+        <widget class="ControlBar" name="controlBar" native="true">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>540</y>
+           <width>631</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QSlider" name="slider_video">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>510</y>
+           <width>631</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -92,6 +112,12 @@ border: 2px solid  rgb(0, 255, 0);
    <class>TitleBar</class>
    <extends>QWidget</extends>
    <header>titlebar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControlBar</class>
+   <extends>QWidget</extends>
+   <header>controlbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

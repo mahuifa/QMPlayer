@@ -37,3 +37,9 @@ background-color: rgba(209, 209, 209, 100);
 #but_close:pressed, #but_max:pressed, #but_min:pressed{
 background-color: rgba(51, 8, 103, 100);
 }
+
+/*播放控制栏*/
+.ControlBar #background{
+background-color: rgba(209, 209, 209, 100);
+border-radius:15px;
+}
