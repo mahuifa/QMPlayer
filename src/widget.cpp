@@ -66,4 +66,37 @@ void Widget::setWindowTitle(const QString &title)
     ui->titleBar->setWindowTitle(title);
 }
 
+/**
+ * @brief  界面动态布局
+ */
+void Widget::windowLayout()
+{
+    // 设置组件大小
+    int l_widget = ui->videoWidget->width() * 3 / 5;
+    QSize size = ui->controlBar->size();
+    size.setWidth(l_widget);
+    ui->controlBar->resize(size);
+    size.setHeight(ui->slider_video->height());
+    ui->slider_video->resize(size);
+
+    // 设置组件位置
+    int x = (ui->videoWidget->width() - ui->controlBar->width()) / 2;
+    int y = ui->videoWidget->height() - ui->controlBar->height() - 20;
+    ui->controlBar->move(x, y);
+    int sliderY = y - ui->slider_video->height() - 5;
+    ui->slider_video->move(x, sliderY);
+}
+
+void Widget::showEvent(QShowEvent *event)
+{
+    MWidgetBase::showEvent(event);
+    windowLayout();
+}
+
+void Widget::resizeEvent(QResizeEvent *event)
+{
+    MWidgetBase::resizeEvent(event);
+    windowLayout();
+}
+
 

@@ -21,6 +21,11 @@ private:
     void connectSlot();        // 绑定信号槽
     void loadStyle();          // 加载样式表
     void setWindowTitle(const QString& title);
+    void windowLayout();       // 界面布局
+
+protected:
+    void showEvent(QShowEvent *event)     override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     Ui::Widget *ui;
