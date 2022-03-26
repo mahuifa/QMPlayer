@@ -23,7 +23,10 @@ RESOURCES += \
 
 # 加载模块
 include($$PWD/WidgetBase/WidgetBase.pri)       # 自定义窗口模块
+include($$PWD/Module/Module.pri)               # 界面组件
+
 INCLUDEPATH += $$PWD/WidgetBase/
+INCLUDEPATH += $$PWD/Module/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

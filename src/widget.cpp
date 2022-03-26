@@ -23,32 +23,13 @@ Widget::~Widget()
 void Widget::init()
 {
     loadStyle();
-    ui->label_title->setText(QString("QMPlayer V%1").arg(APP_VERSION));
-    this->setTitleBar(ui->titleBar);   // 设置标题栏
+    this->setWindowTitle(QString("QMPlayer V%1").arg(APP_VERSION));
+    this->setTitleBar(ui->titleBar->getBackground());   // 设置标题栏
 }
 
 void Widget::connectSlot()
 {
-    connect(this, &MWidgetBase::windowStateChanged, this, &Widget::on_windowStateChanged);
-}
-
-/**
- * @brief               窗口状态改变
- * @param windowStates
- */
-void Widget::on_windowStateChanged(Qt::WindowStates windowStates)
-{
-    switch (windowStates)
-    {
-    case Qt::WindowMaximized:
-        ui->but_max->setProperty("Max", true);
-        break;
-    case Qt::WindowNoState:
-        ui->but_max->setProperty("Max", false);
-        break;
-    default:break;
-    }
-    ui->but_max->style()->polish(ui->but_max);
+    connect(this, &MWidgetBase::windowStateChanged, ui->titleBar, &TitleBar::on_windowStateChanged);
 }
 
 /**
@@ -70,33 +51,19 @@ void Widget::loadStyle()
 
         file.close();
         QString qss = list.join("\n");
-//        QString paletteColor = qss.mid(20, 7);
-//        qApp->setPalette(QPalette(paletteColor));
         this->setStyleSheet("");
         qApp->setStyleSheet(qss);
     }
 }
 
-void Widget::on_but_close_clicked()
+/**
+ * @brief       隐藏Widget设置标题文本功能，添加设置标题栏文本功能
+ * @param title
+ */
+void Widget::setWindowTitle(const QString &title)
 {
-    this->close();
-}
-
-void Widget::on_but_max_clicked()
-{
-    if(this->isMaximized())
-    {
-        this->showNormal();
-    }
-    else
-    {
-        this->showMaximized();
-    }
-}
-
-void Widget::on_but_min_clicked()
-{
-    this->showMinimized();
+    QWidget::setWindowTitle(title);
+    ui->titleBar->setWindowTitle(title);
 }
 
 
