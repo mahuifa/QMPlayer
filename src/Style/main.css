@@ -43,3 +43,9 @@ background-color: rgba(51, 8, 103, 100);
 background-color: rgba(209, 209, 209, 100);
 border-radius:15px;
 }
+
+/*侧边栏*/
+#sidebar #background{
+background-color: rgba(209, 209, 209, 100);
+}
+

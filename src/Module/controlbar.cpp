@@ -1,4 +1,4 @@
-#include "controlbar.h"
+﻿#include "controlbar.h"
 #include "ui_controlbar.h"
 
 ControlBar::ControlBar(QWidget *parent) :

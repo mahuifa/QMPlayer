@@ -100,6 +100,16 @@ border: 2px solid  rgb(0, 255, 0);
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
+        <widget class="Sidebar" name="sidebar" native="true">
+         <property name="geometry">
+          <rect>
+           <x>770</x>
+           <y>0</y>
+           <width>251</width>
+           <height>471</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -118,6 +128,12 @@ border: 2px solid  rgb(0, 255, 0);
    <class>ControlBar</class>
    <extends>QWidget</extends>
    <header>controlbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Sidebar</class>
+   <extends>QWidget</extends>
+   <header>sidebar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -85,6 +85,14 @@ void Widget::windowLayout()
     ui->controlBar->move(x, y);
     int sliderY = y - ui->slider_video->height() - 5;
     ui->slider_video->move(x, sliderY);
+
+    // 侧边栏
+    int l_height = sliderY - 20;
+    size = ui->sidebar->size();
+    size.setHeight(l_height);
+    ui->sidebar->resize(size);
+    x = ui->videoWidget->width() - ui->sidebar->width();
+    ui->sidebar->move(x, 0);
 }
 
 void Widget::showEvent(QShowEvent *event)
