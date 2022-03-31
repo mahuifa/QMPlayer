@@ -1,6 +1,7 @@
-﻿#ifndef WIDGET_H
+#ifndef WIDGET_H
 #define WIDGET_H
 
+#include <QTimer>
 #include <QWidget>
 #include "mwidgetbase.h"
 
@@ -24,8 +25,13 @@ private:
     void windowLayout();       // 界面布局
 
 protected:
+    void showFullScreen();                // 覆盖全屏显示功能
+    void showNormal();                    // 覆盖全屏显示还原功能
     void showEvent(QShowEvent *event)     override;
     void resizeEvent(QResizeEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
+    void videoWidgetEvent(QEvent* event);             // 视频显示窗口事件处理
 
 private:
     Ui::Widget *ui;

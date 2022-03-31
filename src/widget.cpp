@@ -1,8 +1,9 @@
-﻿#include "widget.h"
+#include "widget.h"
 #include "ui_widget.h"
 #include "QWindow"
 #include <QDebug>
 #include <QFile>
+#include <QMouseEvent>
 #include <QStyle>
 
 Widget::Widget(QWidget *parent)
@@ -25,6 +26,9 @@ void Widget::init()
     loadStyle();
     this->setWindowTitle(QString("QMPlayer V%1").arg(APP_VERSION));
     this->setTitleBar(ui->titleBar->getBackground());   // 设置标题栏
+    ui->videoWidget->setMouseTracking(true);                       // 激活鼠标移动事件
+
+    ui->videoWidget->installEventFilter(this);
 }
 
 void Widget::connectSlot()
@@ -87,24 +91,124 @@ void Widget::windowLayout()
     ui->slider_video->move(x, sliderY);
 
     // 侧边栏
-    int l_height = sliderY - 20;
     size = ui->sidebar->size();
-    size.setHeight(l_height);
+    size.setHeight(sliderY - 20);
     ui->sidebar->resize(size);
-    x = ui->videoWidget->width() - ui->sidebar->width();
-    ui->sidebar->move(x, 0);
+    ui->sidebar->move(0, 0);
 }
 
+/**
+ * @brief  全屏显示
+ */
+void Widget::showFullScreen()
+{
+    ui->titleBar->hide();
+    ui->controlBar->hide();
+    ui->slider_video->hide();
+    ui->sidebar->hide();
+    MWidgetBase::showFullScreen();
+}
+
+/**
+ * @brief 全屏显示还原
+ */
+void Widget::showNormal()
+{
+    ui->titleBar->show();
+    ui->controlBar->show();
+    ui->slider_video->show();
+    ui->sidebar->show();
+    MWidgetBase::showNormal();
+}
+
+/**
+ * @brief         窗口显示事件
+ * @param event
+ */
 void Widget::showEvent(QShowEvent *event)
 {
     MWidgetBase::showEvent(event);
     windowLayout();
 }
 
+/**
+ * @brief        窗口大小改变事件
+ * @param event
+ */
 void Widget::resizeEvent(QResizeEvent *event)
 {
     MWidgetBase::resizeEvent(event);
     windowLayout();
 }
 
+/**
+ * @brief         事件过滤器
+ * @param watched
+ * @param event
+ * @return
+ */
+bool Widget::eventFilter(QObject *watched, QEvent *event)
+{
+    if(watched == ui->videoWidget)
+    {
+        videoWidgetEvent(event);
+    }
+
+    return MWidgetBase::eventFilter(watched, event);
+}
+
+/**
+ * @brief        处理窗口中的视频显示界面事件
+ * @param event
+ */
+void Widget::videoWidgetEvent(QEvent *event)
+{
+    switch (event->type())
+    {
+    case QEvent::MouseButtonDblClick:
+    {
+        if(this->isFullScreen())
+        {
+            this->showNormal();
+        }
+        else
+        {
+            this->showFullScreen();
+        }
+        break;
+    }
+    case QEvent::MouseMove:
+    {
+        QMouseEvent* e = static_cast<QMouseEvent*>(event);
+        // 鼠标进入侧边栏范围自动显示隐藏
+        if(e->pos().x() < ui->sidebar->width())
+        {
+            if(!ui->sidebar->isVisible())
+            {
+                ui->sidebar->show();
+            }
+        }
+        else
+        {
+            ui->sidebar->hide();
+        }
+
+        // 进度条和播放控制栏自动显示隐藏
+        if(e->pos().y() > ui->slider_video->y())
+        {
+            if(!ui->slider_video->isVisible())
+            {
+                ui->slider_video->show();
+                ui->controlBar->show();
+            }
+        }
+        else
+        {
+            ui->slider_video->hide();
+            ui->controlBar->hide();
+        }
+    }
+    default:break;
+    }
+}
 
