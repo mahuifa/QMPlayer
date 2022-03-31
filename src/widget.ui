@@ -103,10 +103,10 @@ border: 2px solid  rgb(0, 255, 0);
         <widget class="Sidebar" name="sidebar" native="true">
          <property name="geometry">
           <rect>
-           <x>770</x>
+           <x>0</x>
            <y>0</y>
            <width>251</width>
-           <height>471</height>
+           <height>491</height>
           </rect>
          </property>
         </widget>
