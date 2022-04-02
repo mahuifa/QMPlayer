@@ -1,4 +1,4 @@
-﻿#include "titlebar.h"
+#include "titlebar.h"
 #include "ui_titlebar.h"
 #include <QStyle>
 

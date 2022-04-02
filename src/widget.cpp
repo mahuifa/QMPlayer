@@ -103,10 +103,10 @@ void Widget::windowLayout()
 void Widget::showFullScreen()
 {
     ui->titleBar->hide();
-    ui->controlBar->hide();
     ui->slider_video->hide();
     ui->sidebar->hide();
     MWidgetBase::showFullScreen();
+    ui->controlBar->hide();
 }
 
 /**
@@ -115,10 +115,10 @@ void Widget::showFullScreen()
 void Widget::showNormal()
 {
     ui->titleBar->show();
-    ui->controlBar->show();
     ui->slider_video->show();
     ui->sidebar->show();
     MWidgetBase::showNormal();
+    ui->controlBar->show();
 }
 
 /**
@@ -167,46 +167,45 @@ void Widget::videoWidgetEvent(QEvent *event)
     {
     case QEvent::MouseButtonDblClick:
     {
-        if(this->isFullScreen())
-        {
-            this->showNormal();
-        }
-        else
-        {
-            this->showFullScreen();
-        }
-        break;
-    }
-    case QEvent::MouseMove:
-    {
         QMouseEvent* e = static_cast<QMouseEvent*>(event);
-        // 鼠标进入侧边栏范围自动显示隐藏
-        if(e->pos().x() < ui->sidebar->width())
+        switch (e->button())
         {
-            if(!ui->sidebar->isVisible())
+        case Qt::LeftButton:
+        {
+            if(this->isFullScreen())
             {
-                ui->sidebar->show();
+                this->showNormal();
             }
+            else
+            {
+                this->showFullScreen();
+            }
+            break;
         }
-        else
-        {
-            ui->sidebar->hide();
-        }
-
-        // 进度条和播放控制栏自动显示隐藏
-        if(e->pos().y() > ui->slider_video->y())
+        case Qt::RightButton:
         {
             if(!ui->slider_video->isVisible())
             {
                 ui->slider_video->show();
                 ui->controlBar->show();
+                ui->sidebar->show();
             }
+            else
+            {
+                ui->slider_video->hide();
+                ui->controlBar->hide();
+                ui->sidebar->hide();
+            }
+            break;
         }
-        else
-        {
-            ui->slider_video->hide();
-            ui->controlBar->hide();
+        default:break;
         }
+
+        break;
+    }
+    case QEvent::MouseMove:
+    {
+        break;
     }
     default:break;
     }
