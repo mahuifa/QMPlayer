@@ -29,6 +29,9 @@ public:
     void show();
     void hide();
 
+protected:
+    void on_finished();
+
 private:
     Ui::ControlBar *ui;
 

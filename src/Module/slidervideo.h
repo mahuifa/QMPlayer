@@ -1,42 +1,34 @@
 /******************************************************************************
- * @文件名     sidebar.h
- * @功能       自定义侧边栏，用于显示播放列表
- *            1、支持动画打开关闭功能；
+ * @文件名     slidervideo.h
+ * @功能       自定义视频播放进度条
  *
  * @开发者     mhf
  * @邮箱       1603291350@qq.com
- * @时间       2022/03/27
+ * @时间       2022/04/03
  * @备注
  *****************************************************************************/
-#ifndef SIDEBAR_H
-#define SIDEBAR_H
+#ifndef SLIDERVIDEO_H
+#define SLIDERVIDEO_H
 
-#include <QWidget>
+#include <QSlider>
 
 class QPropertyAnimation;
-
-namespace Ui {
-class Sidebar;
-}
-
-class Sidebar : public QWidget
+class SliderVideo : public QSlider
 {
     Q_OBJECT
-
 public:
-    explicit Sidebar(QWidget *parent = nullptr);
-    ~Sidebar();
+    explicit SliderVideo(QWidget *parent = nullptr);
 
     void show();
     void hide();
+
+signals:
 
 protected:
     void on_finished();
 
 private:
-    Ui::Sidebar *ui;
-
     QPropertyAnimation* m_paShow = nullptr;          // 动画对象，负责打开关闭侧边栏窗口动画
 };
 
-#endif // SIDEBAR_H
+#endif // SLIDERVIDEO_H
