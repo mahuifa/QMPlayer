@@ -87,7 +87,7 @@ border: 2px solid  rgb(0, 255, 0);
           </size>
          </property>
         </widget>
-        <widget class="QSlider" name="slider_video">
+        <widget class="SliderVideo" name="slider_video">
          <property name="geometry">
           <rect>
            <x>180</x>
@@ -135,6 +135,11 @@ border: 2px solid  rgb(0, 255, 0);
    <extends>QWidget</extends>
    <header>sidebar.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SliderVideo</class>
+   <extends>QSlider</extends>
+   <header>slidervideo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

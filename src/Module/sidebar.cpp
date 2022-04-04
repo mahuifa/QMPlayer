@@ -11,6 +11,7 @@ Sidebar::Sidebar(QWidget *parent) :
 
     m_paShow = new QPropertyAnimation(this, "pos");
     m_paShow->setDuration(500);
+    connect(m_paShow, &QPropertyAnimation::finished, this, &Sidebar::on_finished);
 }
 
 Sidebar::~Sidebar()
@@ -23,6 +24,7 @@ Sidebar::~Sidebar()
  */
 void Sidebar::show()
 {
+    QWidget::show();
     m_paShow->setStartValue(QPoint(0 - this->width(), 0));
     m_paShow->setEndValue(QPoint(0, 0));
     m_paShow->setEasingCurve(QEasingCurve::OutQuad);
@@ -38,4 +40,12 @@ void Sidebar::hide()
     m_paShow->setEndValue(QPoint(0 - this->width(), 0));
     m_paShow->setEasingCurve(QEasingCurve::OutQuad);
     m_paShow->start();
+}
+
+void Sidebar::on_finished()
+{
+    if(m_paShow->endValue().toPoint().x() == (0 - this->width()))
+    {
+        QWidget::hide();
+    }
 }

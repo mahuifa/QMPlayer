@@ -103,9 +103,9 @@ void Widget::windowLayout()
 void Widget::showFullScreen()
 {
     ui->titleBar->hide();
+    MWidgetBase::showFullScreen();
     ui->slider_video->hide();
     ui->sidebar->hide();
-    MWidgetBase::showFullScreen();
     ui->controlBar->hide();
 }
 
@@ -115,10 +115,10 @@ void Widget::showFullScreen()
 void Widget::showNormal()
 {
     ui->titleBar->show();
+    MWidgetBase::showNormal();
     ui->slider_video->show();
     ui->sidebar->show();
-    MWidgetBase::showNormal();
-    ui->controlBar->show();
+    ui->controlBar->show();          // 依赖于父窗口大小，必须放在全屏显示还原后面
 }
 
 /**
@@ -170,7 +170,7 @@ void Widget::videoWidgetEvent(QEvent *event)
         QMouseEvent* e = static_cast<QMouseEvent*>(event);
         switch (e->button())
         {
-        case Qt::LeftButton:
+        case Qt::LeftButton:           // 左键双击全屏显示、还原
         {
             if(this->isFullScreen())
             {
@@ -182,9 +182,9 @@ void Widget::videoWidgetEvent(QEvent *event)
             }
             break;
         }
-        case Qt::RightButton:
+        case Qt::RightButton:         // 右键双击显示隐藏控制栏、侧边栏、进度条
         {
-            if(!ui->slider_video->isVisible())
+            if(!ui->controlBar->isVisible())
             {
                 ui->slider_video->show();
                 ui->controlBar->show();
