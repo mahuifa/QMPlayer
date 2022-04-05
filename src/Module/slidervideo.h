@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * @文件名     slidervideo.h
  * @功能       自定义视频播放进度条
  *
@@ -26,6 +26,7 @@ signals:
 
 protected:
     void on_finished();
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     QPropertyAnimation* m_paShow = nullptr;          // 动画对象，负责打开关闭侧边栏窗口动画

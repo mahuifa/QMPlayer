@@ -2,8 +2,19 @@
     <qresource prefix="/">
         <file>Style/main.css</file>
         <file>Style/image/close.png</file>
+        <file>Style/image/Closevolume.png</file>
         <file>Style/image/max.png</file>
         <file>Style/image/min.png</file>
+        <file>Style/image/next.png</file>
+        <file>Style/image/next_hover.png</file>
+        <file>Style/image/play.png</file>
+        <file>Style/image/play_hover.png</file>
+        <file>Style/image/previous.png</file>
+        <file>Style/image/previous_hover.png</file>
         <file>Style/image/restore.png</file>
+        <file>Style/image/setup.png</file>
+        <file>Style/image/stop.png</file>
+        <file>Style/image/stop_hover.png</file>
+        <file>Style/image/volume.png</file>
     </qresource>
 </RCC>
